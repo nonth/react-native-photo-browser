@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   ActionSheetIOS,
-  CameraRoll,
   ScrollView,
   Platform,
   TouchableOpacity,
@@ -9,6 +8,7 @@ import {
   View,
   StyleSheet,
 } from 'react-native';
+import CameraRoll from '@react-native-community/cameraroll';
 
 const EXAMPLES = [
   {
@@ -55,7 +55,7 @@ const EXAMPLES = [
     description: 'showing grid first, custom action method',
     startOnGrid: true,
     displayActionButton: true,
-    displaySelectionButtons: true
+    displaySelectionButtons: true,
   },
 ];
 
@@ -100,8 +100,8 @@ export default class HomeScreen extends Component {
   }
 
   renderExampleRow = example => {
-    const { navigate } = this.props.navigation;
-    const { title, description } = example;
+    const {navigate} = this.props.navigation;
+    const {title, description} = example;
 
     return (
       <TouchableOpacity
@@ -110,15 +110,10 @@ export default class HomeScreen extends Component {
           navigate('Detail', {
             example,
           });
-        }}
-      >
+        }}>
         <View style={styles.row}>
-          <Text style={styles.rowTitle}>
-            {title}
-          </Text>
-          <Text style={styles.rowDescription}>
-            {description}
-          </Text>
+          <Text style={styles.rowTitle}>{title}</Text>
+          <Text style={styles.rowDescription}>{description}</Text>
         </View>
       </TouchableOpacity>
     );

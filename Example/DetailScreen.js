@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import { ActionSheetIOS, Platform, Button } from 'react-native';
-
+import React, {Component} from 'react';
+import {ActionSheetIOS, Platform, Button} from 'react-native';
 import PhotoBrowser from 'react-native-photo-browser';
 
 export default class HomeScreen extends Component {
@@ -9,9 +8,9 @@ export default class HomeScreen extends Component {
   };
 
   state = {
-    mediaList: this.props.navigation.state.params.example.media,
+    mediaList: this.props.route.params.example.media,
     selected: new Set(),
-  }
+  };
 
   onSelectionChanged = (media, index, selected) => {
     this.setState(prevState => {
@@ -21,8 +20,8 @@ export default class HomeScreen extends Component {
       } else {
         copy.delete(index);
       }
-      return { 
-        selected: copy, 
+      return {
+        selected: copy,
       };
     });
   };
@@ -51,14 +50,14 @@ export default class HomeScreen extends Component {
       startOnGrid,
       enableGrid,
       alwaysDisplayStatusBar,
-    } = this.props.navigation.state.params.example;
+    } = this.props.route.params.example;
 
-    const { mediaList, selected } = this.state;
+    const {mediaList, selected} = this.state;
 
     return (
       <>
         <PhotoBrowser
-          onBack={navigator.pop}
+          onBack={this.props.navigation.goBack}
           mediaList={mediaList}
           initialIndex={initialIndex}
           displayNavArrows={displayNavArrows}
@@ -77,7 +76,9 @@ export default class HomeScreen extends Component {
             title="Delete"
             onPress={() =>
               this.setState(prevState => ({
-                mediaList: prevState.mediaList.filter((_, i) => !prevState.selected.has(i)),
+                mediaList: prevState.mediaList.filter(
+                  (_, i) => !prevState.selected.has(i),
+                ),
                 selected: new Set(),
               }))
             }
